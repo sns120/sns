@@ -1,0 +1,33 @@
+#read aduio file
+import scipy.io.wavfile as wavfile
+import scipy
+import scipy.fftpack as fftpk
+import numpy as np
+from matplotlib import pyplot as plt
+s_rate, signal = wavfile.read('/content/drive/MyDrive/Colab 
+Notebooks/training datasets/Copy of Sad(10).wav')
+FFT = abs(fftpk.fft(signal))
+freqs = fftpk.fftfreq(len(FFT), (1.0/s_rate))
+plt.plot(freqs[range(len(FFT)//2)], FFT[range(len(FFT)//2)]) 
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Amplitude')
+plt.show()
+
+#dispersion
+std = np.std(freqs) 
+maxv = np.amax(freqs) 
+minv = np.amin(freqs) 
+median = np.median(freqs)
+iii. #Higher order moments – skewness and kurtosis:
+skew = scipy.stats.skew(freqs) 
+kurt = scipy.stats.kurtosis(freqs) # identify anomalies and 
+outliers in many signal processing applications.
+q1 = np.quantile(freqs, 0.25)
+q3 = np.quantile(freqs, 0.75)
+mode = scipy.stats.mode(freqs)[0][0]
+iqr = scipy.stats.iqr(freqs)
+print('mean as:', mean)
+print('std as:',std)
+print('shew as:',skew)
+print('kurt as:',kurt)
+print('q1 as:',q1)
